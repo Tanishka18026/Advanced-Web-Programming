@@ -1,0 +1,62 @@
+class Cloth
+{
+	public static void Main(string[] args)
+	{
+		
+		double purchase_amt=System.Convert.ToDouble(args[0]);
+
+		string clothtype="handloom";
+		double discount=0;
+		switch (purchase_amt)
+		{
+			case(purchase_amt<=100):
+				if(clothtype=="milk")
+				{
+					discount=0;
+				}
+				else if(clothtype="handloom")
+				{
+					discount=0.05*purchase_amt;
+				}
+				break;
+			case(purchase_amt>101 && purchase_amt<=200):
+				if(clothtype=="milk")
+				{
+					discount=0.05*purchase_amt;
+				}
+				else if(clothtype="handloom")
+				{
+					discount=0.075*purchase_amt;
+				}
+
+				break;
+			case(purchase_amt>201 && purchase_amt<=300):
+				if(clothtype=="milk")
+				{
+					discount=0.075*purchase_amt;
+				}
+				else if(clothtype="handloom")
+				{
+					discount=0.10*purchase_amt;
+				}
+
+				break;
+			case(purchase_amt>300):
+				if(clothtype=="milk")
+				{
+					discount=0.10*purchase_amt;
+				}
+				else if(clothtype="handloom")
+				{
+					discount=0.015*purchase_amt;
+				}
+
+
+				break;
+          			  default:
+                			Console.WriteLine("Invalid choice");
+               				 break;
+		}
+		Console.System.WriteLine("Discount: "+discount);
+        }
+}
