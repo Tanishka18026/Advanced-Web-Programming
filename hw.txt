@@ -1,0 +1,53 @@
+write a asp.net program to createa button with caption label on click of the button add label to it, on click of aa button with caption of text box add text box
+a c# program abstract font dialog and abstract color dialog/form bold italics underline overline fontsize with color option primary and secondary color
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace project
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        Label lblty1;
+        Button button1;
+        Button button2;
+        TextBox txtty1;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            /*lblty1 = new Label();
+            lblty1.Text = "Enter any text";
+            lblty1.BackColor = System.Drawing.Color.Blue;
+            lblty1.ForeColor = System.Drawing.Color.Yellow;
+            lblty1.Font.Bold = true;
+            this.form1.Controls.Add(lblty1);*/
+            button1 = new Button();
+            button1.Text="LABEL";
+            button1.OnClientClick="Button1_Click";
+            this.form1.Controls.Add(button1);
+            button2 = new Button();
+            button2.Text = "Text box";
+            this.form1.Controls.Add(button2);
+            
+        }
+        public void Button1_Click(object sender,EventArgs e)
+        
+            txtty1 = new TextBox();
+            txtty1.Text = "Enter any text";
+            txtty1.BackColor = System.Drawing.Color.Blue;
+            txtty1.ForeColor = System.Drawing.Color.Blue;
+            txtty1.Font.Bold = true;
+            this.form1.Controls.Add(txtty1);
+        }
+
+        protected void Button1_Click1(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+
