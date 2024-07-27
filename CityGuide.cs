@@ -1,29 +1,44 @@
 using System;
 
-class CityGuide 
+class func
 {
-    public static void Main() {
-        Console.WriteLine("Select your choice:");
-        Console.WriteLine("1. London");
-        Console.WriteLine("2. Bombay");
-        Console.WriteLine("3. Paris");
-        Console.WriteLine("Type your choice:");
+	public void Calculate()
+	{
+		Console.WriteLine("Select your choice");
+        Console.WriteLine("London");
+        Console.WriteLine("Bombay");
+        Console.WriteLine("Paris");
+        Console.WriteLine("Type your choice");
 
-        string choice = Console.ReadLine();
+        string name = Console.ReadLine();
 
-        switch (choice.ToLower()) {
-            case "bombay":
+        switch (name)
+        {
+            case "Bombay":
                 Console.WriteLine("Bombay: Guide 5");
                 break;
-            case "london":
+            case "London":
                 Console.WriteLine("London: Guide 10");
                 break;
-            case "paris":
+            case "Paris":
                 Console.WriteLine("Paris: Guide 15");
                 break;
             default:
                 Console.WriteLine("Invalid choice");
                 break;
-        }
+	}
+	}
+}
+
+class CityGuide
+{
+    public static void Main()
+    {
+        func obj=new func();
+	obj.Calculate();
+        
     }
 }
+
+
+

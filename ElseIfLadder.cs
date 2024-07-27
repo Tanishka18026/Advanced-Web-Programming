@@ -1,9 +1,11 @@
 using System;
-class ElseIfLadder
+
+
+class func
 {
-    public static void Main()
-    {
-        int[] rollNumber = { 111, 222, 333, 444 };
+	public void Calculate()
+	{
+		int[] rollNumber = { 111, 222, 333, 444 };
         int[] marks = { 81, 75, 43, 58 };
 
         for (int i = 0; i < rollNumber.Length; i++)
@@ -17,5 +19,13 @@ class ElseIfLadder
             else
                 Console.WriteLine(rollNumber[i] + " FAIL");
         }
+	}
+}
+class ElseIfLadder
+{
+    public static void Main()
+    {
+         func obj=new func();
+	 obj.Calculate();
     }
 }
