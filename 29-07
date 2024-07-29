@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace calender
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+           // lblselecteddate.Text = "Selected Date<br/>";
+        }
+        protected void Calendar1_Selected(object sender, EventArgs e)
+        {
+            lblselecteddate.Text = "Selected Date<br/>";
+            foreach (DateTime dt in Calendar1.SelectedDate)
+            {
+                lblselecteddate.Text += dt.ToShortDateString()+ <br/>;
+            }
+            //DateTime dt = Calendar1.SelectedDate;
+            //lblselecteddate.Text += dt.ToLongDateString();
+        }
+        protected void Button1_Selected(object sender, EventArgs e)
+        {
+            Calendar1.DayHeaderStyle.BackColor = System.Drawing.Color.FromArgb(220,100,140);
+        }
+    }
+}
+
+
+
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="calender.WebForm1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+   
+        <asp:Calendar ID="Calendar1" runat="server" Caption="TYIT CALENDAR" 
+            CaptionAlign="Bottom" SelectionMode="DayWeekMonth" onselectionchanged="Calendar1_Selected"></asp:Calendar>
+   
+        <asp:Button ID="Button1" runat="server" Text="Button" Onclick=Button1_selected />
+   
+    </div>
+</body>
+</html>
+        <asp:Label ID="lblselecteddate" runat="server" Text="Label"></asp:Label>
+    </form>
+
