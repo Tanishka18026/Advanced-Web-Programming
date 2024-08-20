@@ -1,0 +1,88 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderReceipt.aspx.cs" Inherits="OrderReceipt" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Order Receipt</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h2>Order Receipt</h2>
+
+            <!-- Dropdown List (ComboBox) -->
+            <label for="ddlProducts">Select a Product:</label>
+            <asp:DropDownList ID="ddlProducts" runat="server">
+                <asp:ListItem Value="Product1">Product 1</asp:ListItem>
+                <asp:ListItem Value="Product2">Product 2</asp:ListItem>
+                <asp:ListItem Value="Product3">Product 3</asp:ListItem>
+            </asp:DropDownList>
+            <br /><br />
+
+            <!-- Radio Button List -->
+            <label>Select a Shipping Method:</label>
+            <asp:RadioButtonList ID="rblShipping" runat="server">
+                <asp:ListItem Value="Standard">Standard Shipping</asp:ListItem>
+                <asp:ListItem Value="Express">Express Shipping</asp:ListItem>
+                <asp:ListItem Value="Overnight">Overnight Shipping</asp:ListItem>
+            </asp:RadioButtonList>
+            <br /><br />
+
+            <!-- CheckBox List -->
+            <label>Select Add-ons:</label>
+            <asp:CheckBoxList ID="cblAddons" runat="server">
+                <asp:ListItem Value="GiftWrap">Gift Wrap</asp:ListItem>
+                <asp:ListItem Value="Insurance">Insurance</asp:ListItem>
+                <asp:ListItem Value="Warranty">Extended Warranty</asp:ListItem>
+            </asp:CheckBoxList>
+            <br /><br />
+
+            <!-- Bulleted List -->
+            <asp:BulletedList ID="blReceipt" runat="server" DisplayMode="Text">
+            </asp:BulletedList>
+            <br /><br />
+
+            <asp:Button ID="btnSubmit" runat="server" Text="Generate Receipt" OnClick="btnSubmit_Click" />
+        </div>
+    </form>
+</body>
+</html>
+
+
+using System;
+using System.Collections.Generic;
+
+public partial class OrderReceipt : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        List<string> receiptItems = new List<string>();
+
+        // Add selected product
+        receiptItems.Add("Product: " + ddlProducts.SelectedItem.Text);
+
+        // Add selected shipping method
+        receiptItems.Add("Shipping Method: " + rblShipping.SelectedItem.Text);
+
+        // Add selected add-ons
+        foreach (var item in cblAddons.Items)
+        {
+            if (((System.Web.UI.WebControls.ListItem)item).Selected)
+            {
+                receiptItems.Add("Add-on: " + ((System.Web.UI.WebControls.ListItem)item).Text);
+            }
+        }
+
+        // Display the receipt
+        blReceipt.Items.Clear();
+        foreach (string item in receiptItems)
+        {
+            blReceipt.Items.Add(item);
+        }
+    }
+}
