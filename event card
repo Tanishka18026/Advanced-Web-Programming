@@ -1,0 +1,137 @@
+using System.Drawing;
+
+public partial class GreetingCardMaker : System.Web.UI.Page
+{
+ protected void Page_Load(object sender, EventArgs e)
+ {
+ if (!this.IsPostBack)
+ {
+ // Set color options.
+ lstBackColor.Items.Add("White");
+lstBackColor.Items.Add("Red");
+ lstBackColor.Items.Add("Green");
+ lstBackColor.Items.Add("Blue");
+ lstBackColor.Items.Add("Yellow");
+
+ // Set font options.
+ lstFontName.Items.Add("Times New Roman");
+ lstFontName.Items.Add("Arial");
+ lstFontName.Items.Add("Verdana");
+ lstFontName.Items.Add("Tahoma");
+
+ // Set border style options by adding a series of
+ // ListItem objects.
+ ListItem item = new ListItem();
+
+ // The item text indicates the name of the option.
+ item.Text = BorderStyle.None.ToString();
+
+ // The item value records the corresponding integer
+ // from the enumeration. To obtain this value, you
+ // must cast the enumeration value to an integer,
+ // and then convert the number to a string so it
+ // can be placed in the HTML page.
+ item.Value = ((int)BorderStyle.None).ToString();
+
+ // Add the item.
+ lstBorder.Items.Add(item);
+
+ // Now repeat the process for two other border styles.
+ item = new ListItem();
+ item.Text = BorderStyle.Double.ToString();
+ item.Value = ((int)BorderStyle.Double).ToString();
+ lstBorder.Items.Add(item);
+
+ item = new ListItem();
+ item.Text = BorderStyle.Solid.ToString();
+ item.Value = ((int)BorderStyle.Solid).ToString();
+ lstBorder.Items.Add(item);
+
+ // Select the first border option.
+ lstBorder.SelectedIndex = 0;
+// Set the picture.
+ imgDefault.ImageUrl = "defaultpic.png";
+ }
+ }
+
+ protected void cmdUpdate_Click(object sender, EventArgs e)
+ {
+ // Update the color.
+ pnlCard.BackColor = Color.FromName(lstBackColor.SelectedItem.Text); 
+// Update the font.
+ lblGreeting.Font.Name = lstFontName.SelectedItem.Text;
+
+ if (Int32.Parse(txtFontSize.Text) > 0)
+ {
+ lblGreeting.Font.Size =
+ FontUnit.Point(Int32.Parse(txtFontSize.Text));
+ }
+
+ // Update the border style. This requires two conversion steps.
+ // First, the value of the list item is converted from a string
+ // into an integer. Next, the integer is converted to a value in
+ // the BorderStyle enumeration.
+ int borderValue = Int32.Parse(lstBorder.SelectedItem.Value);
+ pnlCard.BorderStyle = (BorderStyle)borderValue;
+
+ // Update the picture.
+ if (chkPicture.Checked)
+ {
+ imgDefault.Visible = true;
+ }
+ else
+ {
+ imgDefault.Visible = false;
+ }
+
+ // Set the text.
+ lblGreeting.Text = txtGreeting.Text;
+ }
+}
+
+
+
+<%@ Page Language="C#" AutoEventWireup="true"
+ CodeFile="GreetingCardMaker.aspx.cs" Inherits="GreetingCardMaker" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+ <title>Greeting Card Maker</title>
+</head>
+<body>
+ <form runat="server">
+ <div>
+ <!-- Here are the controls: -->
+ Choose a background color:<br />
+ <asp:DropDownList ID="lstBackColor" runat="server" Width="194px"
+ Height="22px"/><br /><br />
+ Choose a font:<br />
+ <asp:DropDownList ID="lstFontName" runat="server" Width="194px"
+ Height="22px" /><br /><br />
+Specify a numeric font size:<br />
+ <asp:TextBox ID="txtFontSize" runat="server" /><br /><br />
+ Choose a border style:<br />
+ <asp:RadioButtonList ID="lstBorder" runat="server" Width="177px"
+ Height="59px" /><br /><br />
+ <asp:CheckBox ID="chkPicture" runat="server"
+ Text="Add the Default Picture"></asp:CheckBox><br /><br />
+ Enter the greeting text below:<br />
+ <asp:TextBox ID="txtGreeting" runat="server" Width="240px" Height="85px"
+ TextMode="MultiLine" /><br /><br />
+ <asp:Button ID="cmdUpdate" OnClick="cmdUpdate_Click"
+ runat="server" Width="71px" Height="24px" Text="Update" />
+ </div>
+
+ <!-- Here is the card: -->
+ <asp:Panel ID="pnlCard" runat="server"
+ Width="339px" Height="481px" HorizontalAlign="Center"
+ style="POSITION: absolute; TOP: 16px; LEFT: 313px;">
+ <br />&nbsp;
+ <asp:Label ID="lblGreeting" runat="server" Width="256px"
+ Height="150px" /><br /><br /><br />
+ <asp:Image ID="imgDefault" runat="server" Width="212px"
+ Height="160px" />
+ </asp:Panel>
+ </form>
+</body>
+</html>
